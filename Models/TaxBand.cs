@@ -6,6 +6,10 @@
         public int? Upper { get; }
         public int Rate { get; }
 
+        public TaxBand()
+        {
+        }
+
         public TaxBand(int lower, int? upper, int rate)
         {
             Lower = lower;
