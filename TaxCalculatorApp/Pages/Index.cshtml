@@ -1,0 +1,53 @@
+﻿@page
+@{
+    ViewData["Title"] = "UK Tax Calculator";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title mb-4">UK Tax Calculator</h3>
+                <form id="calcForm" class="row g-3">
+                    <div class="col-12">
+                        <label for="salary" class="form-label">Gross Annual Salary (£)</label>
+                        <input type="number" id="salary" class="form-control" placeholder="Enter salary" required />
+                    </div>
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary">Calculate</button>
+                    </div>
+                </form>
+
+                <div id="resultsSection" class="mt-4" style="display:none;">
+                    <h5 class="mb-3">Results</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Gross Annual Salary:</span>
+                            <strong>£ <span id="grossAnnualSalary"></span></strong>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Gross Monthly Salary:</span>
+                            <strong>£ <span id="grossMonthlySalary"></span></strong>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Net Annual Salary:</span>
+                            <strong>£ <span id="netAnnualSalary"></span></strong>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Net Monthly Salary:</span>
+                            <strong>£ <span id="netMonthlySalary"></span></strong>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Annual Tax Paid:</span>
+                            <strong>£ <span id="annualTax"></span></strong>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Monthly Tax Paid:</span>
+                            <strong>£ <span id="monthlyTax"></span></strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
