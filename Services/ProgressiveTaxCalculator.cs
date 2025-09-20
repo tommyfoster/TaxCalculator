@@ -1,17 +1,21 @@
-﻿using TaxCalculator.Interfaces;
-using TaxCalculator.Models;
+﻿using TaxCalculator.Models;
+using TaxCalculator.Repositories.Interfaces;
+using TaxCalculator.Services.Interfaces;
 
 namespace TaxCalculator.Services
 {
     public class ProgressiveTaxCalculator : ITaxCalculator
     {
-        private readonly List<TaxBand> _bands;
+        private readonly ITaxBandsRepository _taxBandsRepository;
 
-        public ProgressiveTaxCalculator(IEnumerable<TaxBand> bands)
+        public ProgressiveTaxCalculator(ITaxBandsRepository taxBandsRepository)
         {
-            _bands = bands.OrderBy(b => b.Lower).ToList();
+            _taxBandsRepository = taxBandsRepository;
+        }
 
-            // Could add validation here to make sure the bands are contiguous/positive values etc
+        public List<TaxBand> GetTaxBands(int groupId)
+        {
+            return _taxBandsRepository.GetTaxBands(groupId);
         }
 
         public TaxCalculationResult GetTaxCalculationResult(decimal salary)
@@ -21,11 +25,14 @@ namespace TaxCalculator.Services
                 throw new Exception("Error - salary cannot be less than zero!");
             }
 
+            // Get the tax bands associated with this configuration (in this case, group 1)
+            var bands = GetTaxBands(1);
+
             // Start a running total
             decimal total = 0m;
 
             // Cycle through each band, starting with the lowest
-            foreach (var band in _bands)
+            foreach (var band in bands)
             {
                 // In case Upper not specified in band
                 decimal upper = band.Upper ?? decimal.MaxValue;

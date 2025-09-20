@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Hosting;
+using TaxCalculator.Infrastructure;
+
 namespace TaxCalculator
 {
     public class Program
@@ -9,6 +12,9 @@ namespace TaxCalculator
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddControllers();
+
+            // Custom app services registration
+            builder.Services.AddTaxCalculatorServices(builder.Configuration);
 
             var app = builder.Build();
 
@@ -30,6 +36,8 @@ namespace TaxCalculator
             app.MapRazorPages();
 
             app.MapControllers();
+
+            AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(builder.Environment.ContentRootPath, "data"));
 
             app.Run();
         }

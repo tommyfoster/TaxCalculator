@@ -2,11 +2,11 @@
 {
     public class TaxBand
     {
-        public decimal Lower { get; }
-        public decimal? Upper { get; }
+        public int Lower { get; }
+        public int? Upper { get; }
         public int Rate { get; }
 
-        public TaxBand(decimal lower, decimal? upper, int rate)
+        public TaxBand(int lower, int? upper, int rate)
         {
             Lower = lower;
             Upper = upper;
